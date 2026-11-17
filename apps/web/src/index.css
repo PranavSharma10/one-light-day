@@ -23,6 +23,9 @@ body {
   background-image: radial-gradient(ellipse at 85% -10%, #1a1508 0%, transparent 55%);
   color: var(--ink);
   font: 400 16px/1.55 var(--body);
+  min-height: 100vh;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 a { color: var(--gold-soft); }
@@ -38,7 +41,14 @@ a { color: var(--gold-soft); }
 .brand { font: 400 24px/1 var(--display); color: var(--gold); text-decoration: none; }
 
 /* Hero */
-.hero { display: grid; gap: 14px; padding: 48px 0 24px; }
+.hero {
+  display: grid;
+  gap: 14px;
+  justify-items: center;
+  text-align: center;
+  padding: 24px 0 40px;
+}
+.lede { margin: 0; max-width: 60ch; color: var(--muted); }
 .eyebrow {
   margin: 0;
   font: 500 12px/1.4 var(--mono);
@@ -54,6 +64,20 @@ h1 {
 }
 h1 em { color: var(--gold); }
 .lede { margin: 0; max-width: 64ch; color: var(--muted); }
+
+/* Golden Record */
+.record {
+  width: clamp(220px, 36vw, 360px);
+  height: auto;
+  filter: drop-shadow(0 0 60px rgba(217, 180, 90, 0.18));
+}
+.record-spin {
+  transform-origin: 200px 200px;
+  animation: record-spin 3.6s linear infinite; /* 16⅔ rpm */
+}
+@keyframes record-spin {
+  to { transform: rotate(360deg); }
+}
 
 /* Footer */
 .footer {

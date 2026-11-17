@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Starfield from "./components/Starfield";
+import GoldenRecord from "./components/GoldenRecord";
 
 type ApiState = "checking" | "ok" | "down";
 
@@ -23,6 +24,7 @@ export default function App() {
 
         <main id="top">
           <header className="hero">
+            <GoldenRecord />
             <p className="eyebrow">Launched 5 Sep 1977 · Cape Canaveral</p>
             <h1>
               Voyager 1 is <em>one light-day</em> from home.
