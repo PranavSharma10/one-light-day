@@ -1,0 +1,72 @@
+:root {
+  /* Voyager black and Golden Record gold. One theme on purpose: space is dark. */
+  --space: #060608;
+  --panel: #0f0e12;
+  --line: #24212a;
+  --ink: #f1ecdf;
+  --muted: #958e7c;
+  --gold: #d9b45a;
+  --gold-soft: #e9d49a;
+
+  --display: "Instrument Serif", "Times New Roman", serif;
+  --body: "IBM Plex Sans", system-ui, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+
+body {
+  background: var(--space);
+  background-image: radial-gradient(ellipse at 85% -10%, #1a1508 0%, transparent 55%);
+  color: var(--ink);
+  font: 400 16px/1.55 var(--body);
+}
+
+a { color: var(--gold-soft); }
+:focus-visible { outline: 2px solid var(--gold-soft); outline-offset: 2px; }
+
+/* Starfield sits behind everything and ignores the mouse */
+.starfield { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+
+.page { position: relative; z-index: 1; max-width: 1080px; margin: 0 auto; padding: 0 16px 48px; }
+
+/* Nav */
+.nav { display: flex; justify-content: space-between; align-items: center; padding: 18px 0; }
+.brand { font: 400 24px/1 var(--display); color: var(--gold); text-decoration: none; }
+
+/* Hero */
+.hero { display: grid; gap: 14px; padding: 48px 0 24px; }
+.eyebrow {
+  margin: 0;
+  font: 500 12px/1.4 var(--mono);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+h1 {
+  margin: 0;
+  max-width: 16ch;
+  font: 400 clamp(40px, 7vw, 78px)/1 var(--display);
+  text-wrap: balance;
+}
+h1 em { color: var(--gold); }
+.lede { margin: 0; max-width: 64ch; color: var(--muted); }
+
+/* Footer */
+.footer {
+  margin-top: 64px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+  display: grid;
+  gap: 6px;
+  color: var(--muted);
+  font: 400 12px/1.6 var(--mono);
+}
+.footer p { margin: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
