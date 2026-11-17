@@ -1,13 +1,37 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import GoldenRecord from "./components/GoldenRecord";
+import MorseIntro from "./components/MorseIntro";
 import Readout from "./components/Readout";
 import Starfield from "./components/Starfield";
 import Timeline from "./components/Timeline";
 
 type ApiState = "checking" | "ok" | "down";
 
+const INTRO_KEY = "old:intro-seen";
+
+/** Play the intro on a first visit, never for people who've asked for less motion. */
+function shouldPlayIntro(): boolean {
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return false;
+  try {
+    return localStorage.getItem(INTRO_KEY) === null;
+  } catch {
+    return false; // storage blocked: don't risk replaying it on every visit
+  }
+}
+
 export default function App() {
   const [api, setApi] = useState<ApiState>("checking");
+  const [intro, setIntro] = useState(shouldPlayIntro);
+
+  // Stable identity: MorseIntro waits on this inside an effect.
+  const finishIntro = useCallback(() => {
+    try {
+      localStorage.setItem(INTRO_KEY, "1");
+    } catch {
+      /* storage blocked: fine */
+    }
+    setIntro(false);
+  }, []);
 
   useEffect(() => {
     fetch("/api/healthz")
@@ -19,7 +43,9 @@ export default function App() {
   return (
     <>
       <Starfield />
-      <div className="page">
+      {intro && <MorseIntro onDone={finishIntro} />}
+
+      <div className="page" inert={intro}>
         <nav className="nav" aria-label="Main">
           <a className="brand" href="#top">One Light-Day</a>
         </nav>
@@ -49,6 +75,11 @@ export default function App() {
           </p>
           <p>Golden Record photo: NASA/JPL</p>
           <p>Built by Pranav Sharma in Dublin · API: {api}</p>
+          <p>
+            <button type="button" className="linklike" onClick={() => setIntro(true)}>
+              Replay the call sign
+            </button>
+          </p>
         </footer>
       </div>
     </>

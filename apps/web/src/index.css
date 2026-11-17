@@ -212,6 +212,59 @@ body:has(.moment-dialog[open]) { overflow: hidden; }
 .md-why strong { color: var(--gold-soft); font-weight: 500; }
 .md-nav { display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; margin-top: 4px; }
 
+/* Morse intro */
+.intro {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 28px;
+  padding: 24px;
+  background: #000;
+  text-align: center;
+  transition: opacity 900ms ease;
+}
+.intro.leaving { opacity: 0; pointer-events: none; }
+.intro-lamp {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #1c1708;
+  transition: background 30ms linear, box-shadow 30ms linear, transform 900ms ease;
+}
+.intro-lamp.on {
+  background: var(--gold-soft);
+  box-shadow: 0 0 24px 8px rgba(233, 212, 154, 0.55), 0 0 90px 30px rgba(217, 180, 90, 0.25);
+}
+.intro.leaving .intro-lamp { transform: scale(10); }
+.intro-code { display: flex; gap: clamp(16px, 4vw, 40px); }
+.intro-letter { display: grid; gap: 10px; opacity: 0.12; transition: opacity 300ms ease; }
+.intro-letter.shown { opacity: 1; }
+.intro-symbols { font: 500 clamp(18px, 3vw, 26px)/1 var(--mono); letter-spacing: 0.12em; color: var(--gold); }
+.intro-char { font: 400 clamp(44px, 9vw, 88px)/1 var(--display); color: var(--ink); }
+.intro-caption {
+  margin: 0;
+  max-width: 40ch;
+  font: 400 14px/1.5 var(--mono);
+  color: var(--muted);
+  opacity: 0;
+  transition: opacity 500ms ease;
+}
+.intro-caption.shown { opacity: 1; }
+.intro-actions { display: flex; gap: 10px; }
+
+.linklike {
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  color: var(--gold-soft);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
 /* the line through the dots */
 .tl-item::before {
   content: "";
