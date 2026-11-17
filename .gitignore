@@ -1,0 +1,9 @@
+venv/
+.venv/
+__pycache__/
+.pytest_cache/
+node_modules/
+dist/
+.idea/
+.env
+services/api/tests/fixtures/*_latest.*
