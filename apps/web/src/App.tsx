@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import Starfield from "./components/Starfield";
 import GoldenRecord from "./components/GoldenRecord";
+import Readout from "./components/Readout";
+import Starfield from "./components/Starfield";
 
 type ApiState = "checking" | "ok" | "down";
 
@@ -35,6 +36,8 @@ export default function App() {
               object has ever been this far away.
             </p>
           </header>
+
+          <Readout />
         </main>
 
         <footer className="footer">
@@ -42,8 +45,8 @@ export default function App() {
             A fan tribute to Voyager 1 and the team at NASA's Jet Propulsion Laboratory. Not
             affiliated with or endorsed by NASA or JPL.
           </p>
-          <p>Built by Pranav Sharma in Dublin · API: {api}</p>
           <p>Golden Record photo: NASA/JPL</p>
+          <p>Built by Pranav Sharma in Dublin · API: {api}</p>
         </footer>
       </div>
     </>

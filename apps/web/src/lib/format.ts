@@ -1,0 +1,12 @@
+const whole = new Intl.NumberFormat("en-IE", { maximumFractionDigits: 0 });
+
+/** 25,899,207,211 */
+export const km = (n: number) => whole.format(n);
+
+/** 23h 59m 50.46s */
+export function hms(seconds: number, decimals = 2): string {
+  const h = Math.floor(seconds / 3600);
+  const m = Math.floor((seconds % 3600) / 60);
+  const s = (seconds % 60).toFixed(decimals).padStart(decimals ? decimals + 3 : 2, "0");
+  return `${h}h ${String(m).padStart(2, "0")}m ${s}s`;
+}
