@@ -1,0 +1,241 @@
+[
+  {
+    "id": "launch",
+    "date": "1977-09-05",
+    "label": "5 Sep 1977",
+    "kind": "milestone",
+    "title": "Launch",
+    "distance": "Cape Canaveral, Florida",
+    "summary": "Voyager 1 lifts off, 16 days after its twin, on a faster path that gets it to Jupiter first.",
+    "body": "Voyager 1 lifts off on a Titan IIIE-Centaur rocket, 16 days after its twin, Voyager 2. Its faster, shorter path means it reaches Jupiter first.",
+    "why": "The outer planets were lined up in a way that happens about once every 175 years, letting one spacecraft swing from planet to planet.",
+    "image": {
+      "src": "/images/timeline/launch.jpg",
+      "alt": "A Titan IIIE-Centaur rocket lifting off from Cape Canaveral on a column of flame, carrying Voyager 1",
+      "credit": "NASA/JPL-Caltech/KSC (PIA21746)",
+      "source": "https://photojournal.jpl.nasa.gov/catalog/PIA21746"
+    }
+  },
+  {
+    "id": "earth-moon",
+    "date": "1977-09-18",
+    "label": "18 Sep 1977",
+    "kind": "discovery",
+    "title": "Earth and Moon",
+    "distance": "11.66 million km from Earth",
+    "summary": "Looking back, Voyager 1 takes the first photo ever to show the whole Earth and Moon together.",
+    "body": "Thirteen days after launch, Voyager 1 turns its camera back towards home and takes the first photograph ever to show the whole Earth and Moon in a single frame.",
+    "why": "A preview of a habit: Voyager kept looking back at home.",
+    "image": {
+      "src": "/images/timeline/earth-moon.jpg",
+      "alt": "Crescent Earth and, beyond it, a smaller crescent Moon against black space, photographed together by Voyager 1",
+      "credit": "NASA/JPL (PIA00013)",
+      "source": "https://photojournal.jpl.nasa.gov/catalog/PIA00013",
+      "fit": "contain"
+    }
+  },
+  {
+    "id": "jupiter",
+    "date": "1979-03-05",
+    "label": "5 Mar 1979",
+    "kind": "discovery",
+    "title": "Jupiter",
+    "distance": "5.2 AU from the Sun",
+    "summary": "Active volcanoes on Io, a faint ring around Jupiter, and lightning in its clouds.",
+    "body": "Closest approach to Jupiter. Voyager 1 finds active volcanoes on the moon Io, a faint ring around Jupiter, and lightning in its clouds.",
+    "why": "Io's volcanoes were the first active volcanism ever seen beyond Earth.",
+    "image": {
+      "src": "/images/timeline/jupiter.jpg",
+      "alt": "Close-up of Jupiter's swirling clouds, with the Great Red Spot at the top and a white oval storm below it",
+      "credit": "NASA/JPL (PIA01512)",
+      "source": "https://photojournal.jpl.nasa.gov/catalog/PIA01512"
+    }
+  },
+  {
+    "id": "saturn",
+    "date": "1980-11-12",
+    "label": "12 Nov 1980",
+    "kind": "discovery",
+    "title": "Saturn and Titan",
+    "distance": "9.6 AU from the Sun",
+    "summary": "Saturn's rings in detail, then a close pass of Titan and its thick atmosphere.",
+    "body": "Voyager 1 maps Saturn's rings in detail, including the braided F ring and the small moons that shepherd it, then flies close past Titan and finds a thick nitrogen atmosphere.",
+    "why": "Choosing Titan bent Voyager 1's path up and out of the planets' plane. It ended the planetary tour and set the course it still follows today.",
+    "image": {
+      "src": "/images/timeline/saturn.jpg",
+      "alt": "Saturn as a thin crescent, its rings and their shadows seen from behind the planet as Voyager 1 departed",
+      "credit": "NASA/JPL/USGS (PIA00335)",
+      "source": "https://photojournal.jpl.nasa.gov/catalog/PIA00335"
+    }
+  },
+  {
+    "id": "pale-blue-dot",
+    "date": "1990-02-14",
+    "label": "14 Feb 1990",
+    "kind": "milestone",
+    "title": "Pale Blue Dot",
+    "distance": "About 6 billion km from Earth",
+    "summary": "Voyager 1 looks back and photographs Earth as a speck smaller than a pixel.",
+    "body": "Voyager 1 turns around and photographs six planets in a 'family portrait'. Earth is a speck smaller than a single pixel, caught in a ray of sunlight. Soon after, the cameras are switched off for good.",
+    "why": "The image, pushed for by Carl Sagan, became one of the most famous pictures of our planet ever taken.",
+    "image": {
+      "src": "/images/timeline/pale-blue-dot.jpg",
+      "alt": "Earth as a tiny pale blue speck inside a faint beam of scattered sunlight, surrounded by dark space",
+      "credit": "NASA/JPL-Caltech (PIA23645)",
+      "source": "https://photojournal.jpl.nasa.gov/catalog/PIA23645"
+    }
+  },
+  {
+    "id": "most-distant",
+    "date": "1998-02-17",
+    "label": "17 Feb 1998",
+    "kind": "milestone",
+    "title": "Farthest ever",
+    "distance": "About 69 AU from the Sun",
+    "summary": "Voyager 1 overtakes Pioneer 10 to become the most distant human-made object.",
+    "body": "Voyager 1 overtakes Pioneer 10 and becomes the most distant object humans have ever made. It has held the record ever since.",
+    "why": "Every day since, it has been setting a new record.",
+    "image": {
+      "src": "/images/timeline/most-distant.jpg",
+      "alt": "Artist's illustration of the Voyager spacecraft, with its large white dish antenna, against a field of stars",
+      "credit": "NASA/JPL-Caltech (PIA17049)",
+      "source": "https://photojournal.jpl.nasa.gov/catalog/PIA17049"
+    }
+  },
+  {
+    "id": "termination-shock",
+    "date": "2004-12-16",
+    "label": "Dec 2004",
+    "kind": "discovery",
+    "title": "Termination shock",
+    "distance": "About 94 AU from the Sun",
+    "summary": "The solar wind suddenly slows: Voyager 1 enters the outer layer of the Sun's bubble.",
+    "body": "The solar wind, which rushes out from the Sun at supersonic speed, suddenly slows down. Voyager 1 crosses this boundary into the heliosheath, the outer layer of the Sun's bubble.",
+    "why": "The first direct measurement of where the Sun's influence starts to fade.",
+    "image": {
+      "src": "/images/timeline/termination-shock.jpg",
+      "alt": "Artist's concept of the outer layers of the Sun's bubble, with Voyager 1 travelling through them towards interstellar space",
+      "credit": "NASA/JPL-Caltech (PIA17034)",
+      "source": "https://photojournal.jpl.nasa.gov/catalog/PIA17034"
+    }
+  },
+  {
+    "id": "heliopause",
+    "date": "2012-08-25",
+    "label": "25 Aug 2012",
+    "kind": "milestone",
+    "title": "Interstellar space",
+    "distance": "About 121.6 AU from the Sun",
+    "summary": "Voyager 1 crosses the heliopause, the edge of the Sun's bubble, into interstellar space.",
+    "body": "Particles from the Sun almost vanish and cosmic rays from the rest of the galaxy jump. Voyager 1 has crossed the heliopause, the edge of the Sun's bubble. Scientists confirmed it in 2013, when the plasma wave instrument heard the denser gas of interstellar space.",
+    "why": "The first human-made object ever to reach the space between the stars.",
+    "image": {
+      "src": "/images/timeline/heliopause.jpg",
+      "alt": "Artist's illustration of Voyager 1 entering interstellar space, with an orange glow of interstellar gas ahead of it",
+      "credit": "NASA/JPL-Caltech (PIA17462)",
+      "source": "https://photojournal.jpl.nasa.gov/catalog/PIA17462"
+    }
+  },
+  {
+    "id": "thrusters-2017",
+    "date": "2017-11-28",
+    "label": "28 Nov 2017",
+    "kind": "rescue",
+    "title": "Thrusters wake",
+    "distance": "About 141 AU from the Sun",
+    "summary": "Thrusters unused for 37 years fire perfectly, keeping the antenna pointed at Earth.",
+    "body": "With its main attitude thrusters wearing out, engineers try a set unused since the Saturn flyby in 1980. They fire perfectly.",
+    "why": "Keeping the antenna pointed at Earth is what keeps Voyager talking. This bought years of extra life.",
+    "image": {
+      "src": "/images/timeline/thrusters-2017.jpg",
+      "alt": "Artist's illustration of a Voyager spacecraft in deep space, its dish antenna turned back towards the distant Sun",
+      "credit": "NASA/JPL-Caltech (PIA21839)",
+      "source": "https://photojournal.jpl.nasa.gov/catalog/PIA21839"
+    }
+  },
+  {
+    "id": "memory-fix",
+    "date": "2024-04-20",
+    "label": "Nov 2023 – Jun 2024",
+    "kind": "rescue",
+    "title": "Memory chip fix",
+    "distance": "About 24 billion km from Earth",
+    "summary": "One failed chip garbles everything; engineers move the code around it from 22.5 light-hours away.",
+    "body": "From 14 November 2023, Voyager 1 sends back nonsense. The team traces it to one failed chip in the flight data computer, then rewrites and moves the code around it. Engineering data returns on 20 April 2024, and full science by June.",
+    "why": "Software surgery on a 1970s computer, with every test taking two days to answer.",
+    "image": {
+      "src": "/images/timeline/memory-fix.jpg",
+      "alt": "Artist's rendering of the Voyager spacecraft showing its dish antenna, instrument boom and power source",
+      "credit": "NASA/JPL-Caltech (PIA14111)",
+      "source": "https://photojournal.jpl.nasa.gov/catalog/PIA14111"
+    }
+  },
+  {
+    "id": "backup-radio",
+    "date": "2024-10-16",
+    "label": "Oct 2024",
+    "kind": "rescue",
+    "title": "A 1981 radio",
+    "distance": "About 165 AU from the Sun",
+    "summary": "Voyager 1 switches itself to a backup radio unused since 1981; the team finds the faint signal.",
+    "body": "Fault protection switches Voyager 1 to its backup radio transmitter, unused since 1981, to save power. The team finds the faint signal and later restores the main transmitter.",
+    "why": "The spacecraft protected itself first, exactly as designed.",
+    "image": {
+      "src": "/images/timeline/backup-radio.jpg",
+      "alt": "The 70-metre Deep Space Network antenna at Goldstone, California, lit up against the night sky",
+      "credit": "NASA/JPL-Caltech (PIA10953)",
+      "source": "https://photojournal.jpl.nasa.gov/catalog/PIA10953"
+    }
+  },
+  {
+    "id": "power-2026",
+    "date": "2026-04-17",
+    "label": "17 Apr 2026",
+    "kind": "rescue",
+    "title": "Saving power",
+    "distance": "About 171 AU from the Sun",
+    "summary": "An instrument that ran for 49 years is switched off to keep Voyager alive.",
+    "body": "After an unexpected power drop during a routine roll in February, engineers switch off the Low-energy Charged Particles experiment, which ran almost without a break since launch. Two science instruments remain: plasma waves and magnetic fields.",
+    "why": "The nuclear power source makes about 4 watts less each year. Every watt saved buys more science.",
+    "image": {
+      "src": "/images/timeline/power-2026.jpg",
+      "alt": "Artist's illustration of a Voyager probe speeding away through space",
+      "credit": "NASA/JPL-Caltech (PIA26353)",
+      "source": "https://photojournal.jpl.nasa.gov/catalog/PIA26353"
+    }
+  },
+  {
+    "id": "silence-2026",
+    "date": "2026-10-20",
+    "label": "18–20 Oct 2026",
+    "kind": "rescue",
+    "title": "Two days of silence",
+    "distance": "About 25.8 billion km from Earth",
+    "summary": "Voyager 1 goes quiet for two days, then comes back on its own.",
+    "body": "The Deep Space Network can't hear Voyager 1 on two scheduled passes. On 20 October the signal comes back on its own, before engineers send any command. A thruster issue appears to have triggered a backup system.",
+    "why": "Nearly a light-day out, Voyager fixed itself.",
+    "image": {
+      "src": "/images/timeline/silence-2026.jpg",
+      "alt": "The 70-metre Deep Space Station 14 antenna at Goldstone silhouetted against an orange sunset",
+      "credit": "NASA/JPL-Caltech (PIA26150)",
+      "source": "https://photojournal.jpl.nasa.gov/catalog/PIA26150"
+    }
+  },
+  {
+    "id": "one-light-day",
+    "date": "2026-11-18",
+    "label": "18 Nov 2026",
+    "kind": "now",
+    "title": "One light-day",
+    "distance": "25.9 billion km from Earth",
+    "summary": "The first human-made object a full day of light-travel from home.",
+    "body": "Voyager 1 becomes the first human-made object a full day of light-travel from Earth. A signal it sends now takes a day to reach us, and a command we send takes a day to arrive.",
+    "why": "No other spacecraft will reach this distance for years. Voyager 2 is not expected to until 2035.",
+    "image": {
+      "src": "/images/timeline/one-light-day.jpg",
+      "alt": "Artist's chart of solar system distances on a scale from the Sun out past Voyager 1 to the Oort Cloud",
+      "credit": "NASA/JPL-Caltech (PIA17046)",
+      "source": "https://photojournal.jpl.nasa.gov/catalog/PIA17046"
+    }
+  }
+]

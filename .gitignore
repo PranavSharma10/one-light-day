@@ -7,3 +7,4 @@ dist/
 .idea/
 .env
 services/api/tests/fixtures/*_latest.*
+apps/web/images-src/

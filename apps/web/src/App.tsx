@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import GoldenRecord from "./components/GoldenRecord";
 import Readout from "./components/Readout";
 import Starfield from "./components/Starfield";
+import Timeline from "./components/Timeline";
 
 type ApiState = "checking" | "ok" | "down";
 
@@ -38,6 +39,7 @@ export default function App() {
           </header>
 
           <Readout />
+          <Timeline />
         </main>
 
         <footer className="footer">

@@ -59,3 +59,63 @@ export function model(ms: number): VoyagerState {
     source: "model",
   };
 }
+// ---- Live data: JPL Horizons samples from our API --------------------------
+
+/** One sample as the API sends it (see SampleOut in services/api/app/main.py). */
+export interface ApiSample {
+  t: string;
+  helio_au: number;
+  helio_rate_kms: number;
+  range_km: number;
+  range_rate_kms: number;
+  owlt_s: number;
+}
+
+export interface Sample {
+  t: number; // ms since 1970, UTC
+  helioAu: number;
+  rangeKm: number;
+  rangeRateKms: number;
+}
+
+export const fromApi = (rows: ApiSample[]): Sample[] =>
+  rows
+    .map((r) => ({
+      t: Date.parse(r.t),
+      helioAu: r.helio_au,
+      rangeKm: r.range_km,
+      rangeRateKms: r.range_rate_kms,
+    }))
+    .sort((a, b) => a.t - b.t);
+
+/**
+ * Cubic Hermite interpolation between hourly samples. It uses each sample's
+ * range-rate as the curve's slope, which keeps it within metres of JPL.
+ * Returns null outside the sampled window, so callers can fall back to the model.
+ */
+export function interpolate(samples: Sample[], ms: number): VoyagerState | null {
+  if (samples.length < 2 || ms < samples[0].t || ms > samples[samples.length - 1].t) return null;
+
+  let i = 0;
+  while (i < samples.length - 2 && samples[i + 1].t < ms) i++;
+  const a = samples[i];
+  const b = samples[i + 1];
+
+  const h = (b.t - a.t) / 1000;      // gap between samples, seconds
+  const s = (ms - a.t) / 1000 / h;   // 0 at a, 1 at b
+  const h00 = 2 * s ** 3 - 3 * s ** 2 + 1;
+  const h10 = s ** 3 - 2 * s ** 2 + s;
+  const h01 = -2 * s ** 3 + 3 * s ** 2;
+  const h11 = s ** 3 - s ** 2;
+
+  const rangeKm =
+    h00 * a.rangeKm + h10 * h * a.rangeRateKms + h01 * b.rangeKm + h11 * h * b.rangeRateKms;
+
+  return {
+    rangeKm,
+    rangeRateKms: a.rangeRateKms + (b.rangeRateKms - a.rangeRateKms) * s,
+    helioAu: a.helioAu + (b.helioAu - a.helioAu) * s,
+    owltS: rangeKm / C_KMS,
+    source: "horizons",
+  };
+}

@@ -1,16 +1,20 @@
 import { useNow } from "../hooks/useNow";
-import { model } from "../lib/ephemeris";
+import { useVoyager } from "../hooks/useVoyager";
 import { hms, km } from "../lib/format";
 
 export default function Readout() {
   const now = useNow(100);
-  const s = model(now);
+  const { stateAt, loading } = useVoyager();
+  const s = stateAt(now);
+
+  const badge =
+    s.source === "horizons" ? "Live · JPL Horizons" : loading ? "Connecting to JPL…" : "Estimate";
 
   return (
     <section className="readout" aria-label="Voyager 1 right now">
       <div className="readout-head">
         <span className="label">Distance from Earth</span>
-        <span className="source">Estimate</span>
+        <span className={`source${s.source === "horizons" ? " live" : ""}`}>{badge}</span>
       </div>
       <div className="big">
         {km(s.rangeKm)} <small>km</small>
