@@ -43,6 +43,7 @@ export default function App() {
             affiliated with or endorsed by NASA or JPL.
           </p>
           <p>Built by Pranav Sharma in Dublin · API: {api}</p>
+          <p>Golden Record photo: NASA/JPL</p>
         </footer>
       </div>
     </>

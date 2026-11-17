@@ -1,5 +1,6 @@
-// Voyager's Golden Record, drawn in SVG. It spins at 16⅔ rpm, the speed
-// engraved on the record's cover: one turn every 3.6 seconds.
+// Voyager's Golden Record: NASA's photo, spinning at 16⅔ rpm (the speed
+// engraved on the record's cover, one turn every 3.6 s). The drawn grooves
+// underneath show if the photo fails to load.
 
 const C = 200; // centre of the 400 × 400 drawing
 
@@ -26,6 +27,9 @@ export default function GoldenRecord() {
       aria-label="Voyager's Golden Record, spinning at 16⅔ revolutions per minute"
     >
       <defs>
+        <clipPath id="record-clip">
+          <circle cx={C} cy={C} r={196} />
+        </clipPath>
         <radialGradient id="record-gold" cx="50%" cy="50%" r="50%">
           <stop offset="0" stopColor="#f0d88f" />
           <stop offset="0.55" stopColor="#d9b45a" />
@@ -38,7 +42,6 @@ export default function GoldenRecord() {
           <stop offset="0.8" stopColor="#fff" stopOpacity="0.12" />
           <stop offset="0.9" stopColor="#fff" stopOpacity="0" />
         </linearGradient>
-        <path id="record-label-arc" d="M200 200 m-48 0 a48 48 0 1 1 96 0 a48 48 0 1 1 -96 0" />
       </defs>
 
       {/* Everything in this group spins */}
@@ -74,9 +77,15 @@ export default function GoldenRecord() {
           );
         })}
         <circle cx={C} cy={C} r={66} fill="#c9a24a" stroke="#7a5a1c" strokeOpacity={0.5} />
-        <text fontFamily="JetBrains Mono, monospace" fontSize={9} letterSpacing={2.4} fill="#5c4313">
-          <textPath href="#record-label-arc">VOYAGER 1 · 1977 · 16⅔ RPM ·</textPath>
-        </text>
+        <image
+          href="/images/golden-record.webp"
+          x={4}
+          y={4}
+          width={392}
+          height={392}
+          clipPath="url(#record-clip)"
+          preserveAspectRatio="xMidYMid slice"
+        />
       </g>
 
       {/* The reflection stays still while the grooves turn, like a real record */}
