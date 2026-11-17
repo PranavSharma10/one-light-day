@@ -143,6 +143,75 @@ h2 { margin: 0; font: 400 34px/1.1 var(--display); text-wrap: balance; }
   mask-image: linear-gradient(to right, #000 calc(100% - 48px), transparent);
 }
 .tl-item { position: relative; flex: 0 0 140px; scroll-snap-align: start; }
+
+/* Buttons */
+.btn {
+  font: 600 14px/1 var(--body);
+  padding: 11px 15px;
+  border: 1px solid var(--gold);
+  border-radius: 10px;
+  background: var(--gold);
+  color: var(--space);
+  cursor: pointer;
+}
+.btn:hover { filter: brightness(1.08); }
+.btn.ghost { background: transparent; border-color: var(--line); color: var(--muted); }
+.btn.ghost:hover:not(:disabled) { color: var(--ink); border-color: var(--muted); }
+.btn:disabled { opacity: 0.35; cursor: default; }
+.tl-open { justify-self: start; margin-top: 6px; }
+
+/* Moment dialog */
+.moment-dialog {
+  width: min(760px, calc(100% - 32px));
+  max-height: calc(100% - 32px);
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--panel);
+  color: var(--ink);
+}
+.moment-dialog[open] { animation: md-in 180ms ease-out; }
+@keyframes md-in { from { opacity: 0; transform: translateY(8px); } }
+.moment-dialog::backdrop { background: rgba(0, 0, 0, 0.72); backdrop-filter: blur(3px); }
+body:has(.moment-dialog[open]) { overflow: hidden; }
+
+.md-inner { display: grid; gap: 12px; padding: 20px 24px 24px; }
+.md-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.md-close {
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--muted);
+  font-size: 15px;
+  cursor: pointer;
+}
+.md-close:hover { color: var(--ink); border-color: var(--muted); }
+.md-inner h3 { margin: 0; font: 400 clamp(30px, 5vw, 44px)/1.05 var(--display); text-wrap: balance; }
+.md-media { margin: 4px 0; }
+.md-media img {
+  display: block;
+  width: 100%;
+  max-height: 45vh;
+  object-fit: contain;
+  background: #000;
+  border-radius: 10px;
+}
+.md-media figcaption { margin-top: 6px; font-size: 12px; color: var(--muted); }
+.md-media a { color: var(--muted); }
+.md-body { margin: 0; max-width: 64ch; }
+.md-why {
+  margin: 0;
+  padding: 12px 16px;
+  border-left: 2px solid var(--gold);
+  border-radius: 0 8px 8px 0;
+  background: rgba(217, 180, 90, 0.06);
+  color: var(--muted);
+}
+.md-why strong { color: var(--gold-soft); font-weight: 500; }
+.md-nav { display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; margin-top: 4px; }
+
 /* the line through the dots */
 .tl-item::before {
   content: "";
