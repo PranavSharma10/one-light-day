@@ -9,6 +9,7 @@ import Timeline from "./components/Timeline";
 import { useHash } from "./hooks/useHash";
 import { useVoyager } from "./hooks/useVoyager";
 import GoldenRecordRoom from "./record/GoldenRecordRoom";
+import ComingSoon from "./lab/ComingSoon";
 
 type ApiState = "checking" | "ok" | "down";
 
@@ -33,7 +34,7 @@ export default function App() {
 
   // A tiny router: "#story" shows the comic, anything else the home page.
   const hash = useHash();
-  const view = hash === "#story" ? "story" : hash === "#record" ? "record" : "home";
+  const view = hash === "#story" ? "story" : hash === "#record" ? "record" : hash === "#lab" ? "lab" : "home";
 
   // Open the comic and the Golden Record room at the top; on the home page, scroll to the section the link names.
   useEffect(() => {
@@ -75,11 +76,14 @@ export default function App() {
             <a href="#record" aria-current={view === "record" ? "page" : undefined}>
               Golden Record
             </a>
+            <a href="#lab" aria-current={view === "lab" ? "page" : undefined}>
+              Lab
+            </a>
           </div>
         </nav>
 
         <main id="top">
-          {view === "story" ? <ComicBook /> : view === "record" ? <GoldenRecordRoom /> : (
+          {view === "story" ? <ComicBook /> : view === "record" ? <GoldenRecordRoom /> : view === "lab" ? <ComingSoon /> : (
             <>
               <header className="hero">
                 <GoldenRecord />

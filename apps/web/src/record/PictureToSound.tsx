@@ -99,7 +99,7 @@ export default function PictureToSound() {
     // 3. Play the sound, and draw each line as soon as it has been heard.
     const audio = new AudioContext({ sampleRate: SAMPLE_RATE });
     const buffer = audio.createBuffer(1, signal.length, SAMPLE_RATE);
-    buffer.copyToChannel(signal, 0);
+    buffer.getChannelData(0).set(signal);
     const node = audio.createBufferSource();
     node.buffer = buffer;
     const gain = audio.createGain();
