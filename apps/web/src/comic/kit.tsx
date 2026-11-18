@@ -299,3 +299,41 @@ export function Bird({ x, y, s = 1 }: { x: number; y: number; s?: number }) {
     </g>
   );
 }
+
+/** Radio waves: arcs spreading out from (x, y) towards `angle` degrees (0 = right, 90 = down). */
+export function Waves(props: { x: number; y: number; r?: number; n?: number; angle?: number; color?: string }) {
+  const { x, y, r = 22, n = 3, angle = 0, color = YELLOW } = props;
+  const rad = (deg: number) => (deg * Math.PI) / 180;
+  return (
+    <g stroke={color} strokeWidth={3} fill="none" strokeLinecap="round">
+      {Array.from({ length: n }, (_, i) => {
+        const R = r * (i + 1);
+        const a1 = rad(angle - 32);
+        const a2 = rad(angle + 32);
+        return (
+          <path
+            key={i}
+            d={`M${x + R * Math.cos(a1)} ${y + R * Math.sin(a1)} A${R} ${R} 0 0 1 ${x + R * Math.cos(a2)} ${y + R * Math.sin(a2)}`}
+            opacity={1 - i * 0.22}
+          />
+        );
+      })}
+    </g>
+  );
+}
+
+/** A puff of thruster gas. */
+export function Puff({ x, y, s = 1 }: { x: number; y: number; s?: number }) {
+  return (
+    <g transform={`translate(${x} ${y}) scale(${s})`} fill="#f4f1e8" stroke={INK} strokeWidth={2.5}>
+      <circle cx={0} cy={0} r={9} />
+      <circle cx={12} cy={-4} r={11} />
+      <circle cx={26} cy={2} r={8} />
+    </g>
+  );
+}
+
+/** A faint beam of scattered sunlight, like the one Earth sits in on the Pale Blue Dot. */
+export function SunBeam({ points }: { points: string }) {
+  return <polygon points={points} fill="#fff6d8" opacity={0.12} />;
+}
