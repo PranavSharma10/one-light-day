@@ -102,15 +102,15 @@ export function Sfx({ x, y, text, size = 34, color = YELLOW }: { x: number; y: n
 }
 
 /** The "Gift to humanity" card at the bottom of each page. */
-export function Gift({ y, lines }: { y: number; lines: string[] }) {
+export function Gift({ y, lines, title = "Gift to humanity" }: { y: number; lines: string[]; title?: string }) {
   return (
     <g>
       <rect x={40} y={y} width={600} height={72} fill={YELLOW} stroke={INK} strokeWidth={4} />
       <text x={56} y={y + 44} fontFamily={SFX_FONT} fontSize={26} fill={INK} letterSpacing={0.5}>
-        Gift to humanity
+        {title}
       </text>
       {lines.map((line, i) => (
-        <text key={i} x={250} y={y + 32 + i * 22} fontFamily={SPEECH_FONT} fontWeight={700} fontSize={14} fill={INK}>
+        <text key={i} x={292} y={y + 32 + i * 22} fontFamily={SPEECH_FONT} fontWeight={700} fontSize={14} fill={INK}>
           {line}
         </text>
       ))}
@@ -336,4 +336,17 @@ export function Puff({ x, y, s = 1 }: { x: number; y: number; s?: number }) {
 /** A faint beam of scattered sunlight, like the one Earth sits in on the Pale Blue Dot. */
 export function SunBeam({ points }: { points: string }) {
   return <polygon points={points} fill="#fff6d8" opacity={0.12} />;
+}
+
+/** A Deep Space Network dish on its stand. */
+export function Dish({ x, y, s = 1 }: { x: number; y: number; s?: number }) {
+  return (
+    <g transform={`translate(${x} ${y}) scale(${s})`} stroke={INK} strokeWidth={3} strokeLinejoin="round">
+      <path d="M-6 0 L-16 42 M6 0 L16 42" fill="none" />
+      <rect x={-26} y={40} width={52} height={10} rx={2} fill="#9a9a9a" />
+      <path d="M-44 -26 Q-12 34 42 -8 Z" fill="#f4f1e8" />
+      <path d="M-2 -6 L16 -38" fill="none" />
+      <circle cx={17} cy={-40} r={5} fill="#e9c46a" />
+    </g>
+  );
 }
