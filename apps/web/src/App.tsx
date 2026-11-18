@@ -8,6 +8,7 @@ import Starfield from "./components/Starfield";
 import Timeline from "./components/Timeline";
 import { useHash } from "./hooks/useHash";
 import { useVoyager } from "./hooks/useVoyager";
+import GoldenRecordRoom from "./record/GoldenRecordRoom";
 
 type ApiState = "checking" | "ok" | "down";
 
@@ -32,11 +33,11 @@ export default function App() {
 
   // A tiny router: "#story" shows the comic, anything else the home page.
   const hash = useHash();
-  const view = hash === "#story" ? "story" : "home";
+  const view = hash === "#story" ? "story" : hash === "#record" ? "record" : "home";
 
-  // Open the comic at the top; on the home page, scroll to the section the link names.
+  // Open the comic and the Golden Record room at the top; on the home page, scroll to the section the link names.
   useEffect(() => {
-    if (view === "story") window.scrollTo({ top: 0 });
+    if (view !== "home") window.scrollTo({ top: 0 });
     else if (hash) document.getElementById(hash.slice(1))?.scrollIntoView();
   }, [hash, view]);
 
@@ -71,13 +72,14 @@ export default function App() {
             <a href="#story" aria-current={view === "story" ? "page" : undefined}>
               Story
             </a>
+            <a href="#record" aria-current={view === "record" ? "page" : undefined}>
+              Golden Record
+            </a>
           </div>
         </nav>
 
         <main id="top">
-          {view === "story" ? (
-            <ComicBook />
-          ) : (
+          {view === "story" ? <ComicBook /> : view === "record" ? <GoldenRecordRoom /> : (
             <>
               <header className="hero">
                 <GoldenRecord />
