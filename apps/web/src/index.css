@@ -628,3 +628,22 @@ body:has(.moment-dialog[open]) { overflow: hidden; }
   .comic-dots { gap: 6px; }
   .comic-dots button { width: 9px; height: 9px; }
 }
+
+/* Scenery animations */
+.spin-slow {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: spin-slow 12s linear infinite;
+}
+@keyframes spin-slow {
+  to { transform: rotate(360deg); }
+}
+.erupt {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  animation: erupt 1.4s ease-in-out infinite alternate;
+}
+@keyframes erupt {
+  from { transform: scaleY(0.85); opacity: 0.8; }
+  to { transform: scaleY(1.05); opacity: 1; }
+}
