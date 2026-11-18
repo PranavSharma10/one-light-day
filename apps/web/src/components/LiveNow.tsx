@@ -1,12 +1,16 @@
 import { useNow } from "../hooks/useNow";
-import { useVoyager } from "../hooks/useVoyager";
+import type { VoyagerState } from "../lib/ephemeris";
 import Readout from "./Readout";
 import TalkToVoyager from "./TalkToVoyager";
 
-/** Everything that ticks shares one clock and one source of Voyager's position. */
-export default function LiveNow() {
+interface Props {
+  stateAt: (ms: number) => VoyagerState;
+  loading: boolean;
+}
+
+/** The fast-ticking part of the page: one 100 ms clock shared by the readout and Talk to Voyager. */
+export default function LiveNow({ stateAt, loading }: Props) {
   const now = useNow(100);
-  const { stateAt, loading } = useVoyager();
 
   return (
     <>

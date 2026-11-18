@@ -1,9 +1,11 @@
 import { useCallback, useEffect, useState } from "react";
 import GoldenRecord from "./components/GoldenRecord";
-import MorseIntro from "./components/MorseIntro";
+import HeliosphereScale from "./components/HeliosphereScale";
 import LiveNow from "./components/LiveNow";
+import MorseIntro from "./components/MorseIntro";
 import Starfield from "./components/Starfield";
 import Timeline from "./components/Timeline";
+import { useVoyager } from "./hooks/useVoyager";
 
 type ApiState = "checking" | "ok" | "down";
 
@@ -22,6 +24,9 @@ function shouldPlayIntro(): boolean {
 export default function App() {
   const [api, setApi] = useState<ApiState>("checking");
   const [intro, setIntro] = useState(shouldPlayIntro);
+
+  // One source of Voyager's position for the whole page (JPL data, fallback model).
+  const { stateAt, loading } = useVoyager();
 
   // Stable identity: MorseIntro waits on this inside an effect.
   const finishIntro = useCallback(() => {
@@ -64,8 +69,9 @@ export default function App() {
             </p>
           </header>
 
-          <LiveNow />
+          <LiveNow stateAt={stateAt} loading={loading} />
           <Timeline />
+          <HeliosphereScale stateAt={stateAt} />
         </main>
 
         <footer className="footer">

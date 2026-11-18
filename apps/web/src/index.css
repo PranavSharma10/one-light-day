@@ -344,6 +344,17 @@ body:has(.moment-dialog[open]) { overflow: hidden; }
 .message.arrived .bar i { background: var(--gold); }
 .clear { justify-self: end; }
 
+/* Heliosphere scale */
+.scale-section { display: grid; gap: 16px; margin-top: 48px; }
+.scale-wrap {
+  overflow-x: auto;
+  padding: 16px 12px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--panel);
+}
+.scale { display: block; width: 100%; min-width: 680px; }
+
 /* the line through the dots */
 .tl-item::before {
   content: "";
