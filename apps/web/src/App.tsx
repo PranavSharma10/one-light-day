@@ -1,10 +1,12 @@
 import { useCallback, useEffect, useState } from "react";
+import ComicBook from "./components/ComicBook";
 import GoldenRecord from "./components/GoldenRecord";
 import HeliosphereScale from "./components/HeliosphereScale";
 import LiveNow from "./components/LiveNow";
 import MorseIntro from "./components/MorseIntro";
 import Starfield from "./components/Starfield";
 import Timeline from "./components/Timeline";
+import { useHash } from "./hooks/useHash";
 import { useVoyager } from "./hooks/useVoyager";
 
 type ApiState = "checking" | "ok" | "down";
@@ -27,6 +29,16 @@ export default function App() {
 
   // One source of Voyager's position for the whole page (JPL data, fallback model).
   const { stateAt, loading } = useVoyager();
+
+  // A tiny router: "#story" shows the comic, anything else the home page.
+  const hash = useHash();
+  const view = hash === "#story" ? "story" : "home";
+
+  // Open the comic at the top; on the home page, scroll to the section the link names.
+  useEffect(() => {
+    if (view === "story") window.scrollTo({ top: 0 });
+    else if (hash) document.getElementById(hash.slice(1))?.scrollIntoView();
+  }, [hash, view]);
 
   // Stable identity: MorseIntro waits on this inside an effect.
   const finishIntro = useCallback(() => {
@@ -53,25 +65,38 @@ export default function App() {
       <div className="page" inert={intro}>
         <nav className="nav" aria-label="Main">
           <a className="brand" href="#top">One Light-Day</a>
+          <div className="nav-links">
+            <a href="#top">Now</a>
+            <a href="#journey">Journey</a>
+            <a href="#story" aria-current={view === "story" ? "page" : undefined}>
+              Story
+            </a>
+          </div>
         </nav>
 
         <main id="top">
-          <header className="hero">
-            <GoldenRecord />
-            <p className="eyebrow">Launched 5 Sep 1977 · Cape Canaveral</p>
-            <h1>
-              Voyager 1 is <em>one light-day</em> from home.
-            </h1>
-            <p className="lede">
-              On 18 November 2026, Voyager 1 is one light-day from Earth. A signal it sends takes a
-              full day to reach us, and a command we send takes a day to arrive. No human-made
-              object has ever been this far away.
-            </p>
-          </header>
+          {view === "story" ? (
+            <ComicBook />
+          ) : (
+            <>
+              <header className="hero">
+                <GoldenRecord />
+                <p className="eyebrow">Launched 5 Sep 1977 · Cape Canaveral</p>
+                <h1>
+                  Voyager 1 is <em>one light-day</em> from home.
+                </h1>
+                <p className="lede">
+                  On 18 November 2026, Voyager 1 is one light-day from Earth. A signal it sends
+                  takes a full day to reach us, and a command we send takes a day to arrive. No
+                  human-made object has ever been this far away.
+                </p>
+              </header>
 
-          <LiveNow stateAt={stateAt} loading={loading} />
-          <Timeline />
-          <HeliosphereScale stateAt={stateAt} />
+              <LiveNow stateAt={stateAt} loading={loading} />
+              <Timeline />
+              <HeliosphereScale stateAt={stateAt} />
+            </>
+          )}
         </main>
 
         <footer className="footer">
