@@ -1,12 +1,12 @@
-import { useNow } from "../hooks/useNow";
-import { useVoyager } from "../hooks/useVoyager";
+import type { VoyagerState } from "../lib/ephemeris";
 import { hms, km } from "../lib/format";
 
-export default function Readout() {
-  const now = useNow(100);
-  const { stateAt, loading } = useVoyager();
-  const s = stateAt(now);
+interface Props {
+  state: VoyagerState;
+  loading: boolean;
+}
 
+export default function Readout({ state: s, loading }: Props) {
   const badge =
     s.source === "horizons" ? "Live · JPL Horizons" : loading ? "Connecting to JPL…" : "Estimate";
 

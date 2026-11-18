@@ -119,3 +119,23 @@ export function interpolate(samples: Sample[], ms: number): VoyagerState | null 
     source: "horizons",
   };
 }
+
+// ---- Signal timing ----------------------------------------------------------
+
+/**
+ * How long a signal sent from Earth at `sendMs` takes to reach Voyager.
+ * Voyager keeps moving away while the signal travels, so we solve
+ * "light time = distance when it arrives / c" by repeating the guess.
+ */
+export function uplinkSeconds(stateAt: (ms: number) => VoyagerState, sendMs: number): number {
+  let lt = stateAt(sendMs).owltS;
+  for (let i = 0; i < 3; i++) lt = stateAt(sendMs + lt * 1000).rangeKm / C_KMS;
+  return lt;
+}
+
+/** When a reply sent by Voyager at `voyagerMs` is received on Earth. */
+export function replyArrivesMs(stateAt: (ms: number) => VoyagerState, voyagerMs: number): number {
+  let t = voyagerMs + stateAt(voyagerMs).owltS * 1000;
+  for (let i = 0; i < 3; i++) t = voyagerMs + stateAt(t).owltS * 1000;
+  return t;
+}

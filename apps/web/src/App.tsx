@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import GoldenRecord from "./components/GoldenRecord";
 import MorseIntro from "./components/MorseIntro";
-import Readout from "./components/Readout";
+import LiveNow from "./components/LiveNow";
 import Starfield from "./components/Starfield";
 import Timeline from "./components/Timeline";
 
@@ -64,7 +64,7 @@ export default function App() {
             </p>
           </header>
 
-          <Readout />
+          <LiveNow />
           <Timeline />
         </main>
 

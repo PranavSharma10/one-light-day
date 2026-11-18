@@ -10,3 +10,15 @@ export function hms(seconds: number, decimals = 2): string {
   const s = (seconds % 60).toFixed(decimals).padStart(decimals ? decimals + 3 : 2, "0");
   return `${h}h ${String(m).padStart(2, "0")}m ${s}s`;
 }
+
+/** Wed 19 Nov, 06:16:07 GMT, in the visitor's own time zone */
+export const when = (ms: number) =>
+  new Date(ms).toLocaleString("en-IE", {
+    weekday: "short",
+    day: "numeric",
+    month: "short",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    timeZoneName: "short",
+  });
