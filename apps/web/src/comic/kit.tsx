@@ -1,5 +1,5 @@
 // The comic kit: the building blocks every page is made from.
-import { useId, type ReactNode } from "react";
+import { createContext, useContext, useId, type ReactNode } from "react";
 
 export const INK = "#111";
 export const PAPER = "#f5efe0";
@@ -12,16 +12,20 @@ export const SFX_FONT = "Bangers, Impact, sans-serif";
 const textWidth = (text: string, size: number) => text.length * size * 0.53;
 
 /** A whole comic page: paper background, 680 units wide. */
+/** Each page gets its own halftone pattern id, so many pages can share one document (the printed book). */
+const HalftoneId = createContext("halftone");
+
 export function ComicPage({ height, label, children }: { height: number; label: string; children: ReactNode }) {
+  const halftone = "halftone" + useId().replace(/[^a-zA-Z0-9]/g, "");
   return (
     <svg className="comic-page" viewBox={`0 0 680 ${height}`} role="img" aria-label={label}>
       <defs>
-        <pattern id="halftone" width="8" height="8" patternUnits="userSpaceOnUse">
+        <pattern id={halftone} width="8" height="8" patternUnits="userSpaceOnUse">
           <circle cx="2" cy="2" r="1.1" fill="#fff" opacity="0.13" />
         </pattern>
       </defs>
       <rect width={680} height={height} rx={14} fill={PAPER} />
-      {children}
+      <HalftoneId.Provider value={halftone}>{children}</HalftoneId.Provider>
     </svg>
   );
 }
@@ -30,6 +34,7 @@ export function ComicPage({ height, label, children }: { height: number; label: 
 export function Panel(props: { x: number; y: number; w: number; h: number; sky?: string; children?: ReactNode }) {
   const { x, y, w, h, sky = SPACE, children } = props;
   const clip = "clip" + useId().replace(/[^a-zA-Z0-9]/g, "");
+  const halftone = useContext(HalftoneId);
   return (
     <g>
       <clipPath id={clip}>
@@ -37,7 +42,7 @@ export function Panel(props: { x: number; y: number; w: number; h: number; sky?:
       </clipPath>
       <g clipPath={`url(#${clip})`}>
         <rect x={x} y={y} width={w} height={h} fill={sky} />
-        <rect x={x} y={y} width={w} height={h} fill="url(#halftone)" />
+        <rect x={x} y={y} width={w} height={h} fill={`url(#${halftone})`} />
         {children}
       </g>
       <rect x={x} y={y} width={w} height={h} fill="none" stroke={INK} strokeWidth={4} />
@@ -80,7 +85,7 @@ export function Bubble(props: { x: number; y: number; lines: string[]; tail: [nu
   }
 
   return (
-    <g>
+    <g data-say={lines.join(" ")}>
       <rect x={x} y={y} width={w} height={h} rx={14} fill="#fff" stroke={INK} strokeWidth={2.5} />
       <path d={tailPath} fill="#fff" stroke={INK} strokeWidth={2.5} strokeLinejoin="round" />
       {lines.map((line, i) => (
@@ -104,7 +109,7 @@ export function Sfx({ x, y, text, size = 34, color = YELLOW }: { x: number; y: n
 /** The "Gift to humanity" card at the bottom of each page. */
 export function Gift({ y, lines, title = "Gift to humanity" }: { y: number; lines: string[]; title?: string }) {
   return (
-    <g>
+    <g data-say={lines.join(" ")}>
       <rect x={40} y={y} width={600} height={72} fill={YELLOW} stroke={INK} strokeWidth={4} />
       <text x={56} y={y + 44} fontFamily={SFX_FONT} fontSize={26} fill={INK} letterSpacing={0.5}>
         {title}

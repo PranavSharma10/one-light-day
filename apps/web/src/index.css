@@ -647,3 +647,61 @@ body:has(.moment-dialog[open]) { overflow: hidden; }
   from { transform: scaleY(0.85); opacity: 0.8; }
   to { transform: scaleY(1.05); opacity: 1; }
 }
+
+/* ---- Step 15e: read-aloud and the printable book ---- */
+
+.comic-tools { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.comic-note { margin: 0; font-size: 14px; color: var(--muted); }
+
+/* The bubble being read lights up */
+.comic-page [data-say] > rect:first-child,
+.comic-page [data-say] > path { transition: stroke 200ms, stroke-width 200ms; }
+.comic-page .reading > rect:first-child,
+.comic-page .reading > path { stroke: #f0a020; stroke-width: 5; }
+.comic-page .reading { filter: drop-shadow(0 0 8px rgba(255, 200, 60, 0.85)); }
+.comic-title h2.reading { text-decoration: underline 2px var(--gold); text-underline-offset: 6px; }
+
+/* ---- The printable book ---- */
+
+/* Off-screen (not display:none) so its photos still load before printing. */
+@media screen {
+  .print-book { position: fixed; top: 0; left: -10000px; width: 186mm; }
+}
+
+.print-book {
+  color: #1b1a17;
+  background: #fff;
+  font: 11pt/1.45 var(--body);
+  print-color-adjust: exact;
+  -webkit-print-color-adjust: exact;
+}
+.print-book * { animation: none !important; }
+
+.pb-cover,
+.pb-chapter { break-after: page; break-inside: avoid; }
+
+.pb-cover { display: grid; justify-items: center; align-content: center; gap: 8mm; min-height: 260mm; text-align: center; }
+.pb-cover h1 { margin: 0; font: 400 34pt/1.05 var(--display); }
+.pb-eyebrow { margin: 0; font: 600 10pt/1 var(--mono); letter-spacing: 0.2em; text-transform: uppercase; color: #8a6a1c; }
+.pb-sub { margin: 0; font-size: 14pt; }
+.pb-hero { width: 120mm; height: auto; }
+.pb-small { margin: 0; font-size: 12pt; }
+
+.pb-chapter { display: grid; gap: 4mm; }
+.pb-chapter header span { font: 600 9pt/1 var(--mono); letter-spacing: 0.12em; text-transform: uppercase; color: #6d6656; }
+.pb-chapter h2 { margin: 1mm 0 0; font: 400 22pt/1.1 var(--display); }
+.pb-chapter .comic-page { width: auto; height: 180mm; max-width: 100%; margin: 0 auto; }
+
+.pb-real { display: grid; grid-template-columns: 58mm 1fr; gap: 5mm; padding: 4mm; border: 0.4mm solid #d6cfbd; border-radius: 3mm; }
+.pb-real img { width: 100%; aspect-ratio: 4 / 3; border-radius: 2mm; background: #000; }
+.pb-real h3 { margin: 0 0 2mm; font: 600 10pt/1 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: #8a6a1c; }
+.pb-real ul { margin: 0; padding-left: 4.5mm; display: grid; gap: 1.5mm; font-size: 9.5pt; line-height: 1.4; }
+.pb-credit { margin: 2mm 0 0; font-size: 8pt; color: #6d6656; }
+
+@media print {
+  @page { size: A4; margin: 12mm; }
+  /* While the book is mounted, print only the book. */
+  html:has(> body > .print-book) { color-scheme: light; background: #fff; }
+  body:has(> .print-book) { background: #fff; }
+  body:has(> .print-book) > :not(.print-book) { display: none !important; }
+}

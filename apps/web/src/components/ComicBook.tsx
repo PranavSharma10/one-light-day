@@ -1,5 +1,7 @@
-import { useEffect, useRef, useState, type PointerEvent } from "react";
+import { useEffect, useMemo, useRef, useState, type PointerEvent } from "react";
 import { PAGES } from "../comic/pages";
+import { canSpeak, useReadAloud, type Finish } from "../hooks/useReadAloud";
+import PrintBook from "./PrintBook";
 
 const SWIPE_PX = 50;
 
@@ -13,6 +15,28 @@ export default function ComicBook() {
   const heading = useRef<HTMLHeadingElement>(null);
 
   const go = (i: number) => setIndex(Math.max(0, Math.min(PAGES.length - 1, i)));
+
+  // Read-aloud: the chapter title, then every bubble in order. At the end of a page, turn to the next one.
+  const [reading, setReading] = useState(false);
+  const [blocked, setBlocked] = useState(false);
+  const script = useMemo(() => [`Chapter ${page.chapter}. ${page.title.replace(/[^.!?]$/, "$&.")}`, ...page.speech], [page]);
+  const onFinish = (why: Finish) => {
+    if (why === "blocked") setBlocked(true);
+    if (why === "blocked" || last) setReading(false);
+    else go(index + 1);
+  };
+  const line = useReadAloud(script, reading, onFinish);
+
+  // Light up the bubble being read. The bubbles carry their text in data-say (see kit.tsx).
+  const sheet = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const text = line > 0 ? script[line] : null;
+    sheet.current?.querySelectorAll<SVGElement>("[data-say]").forEach((el) => {
+      el.classList.toggle("reading", el.dataset.say === text);
+    });
+  }, [line, script]);
+
+  const [printing, setPrinting] = useState(false);
 
   // Arrow keys turn pages (unless you're typing somewhere).
   useEffect(() => {
@@ -50,18 +74,44 @@ export default function ComicBook() {
       <header className="comic-head">
         <p className="eyebrow">A comic for everyone</p>
         <h1 id="comic-h">The little probe that kept going</h1>
+        <div className="comic-tools">
+          {canSpeak && (
+            <button
+              type="button"
+              className={reading ? "btn" : "btn ghost"}
+              aria-pressed={reading}
+              onClick={() => {
+                setBlocked(false);
+                setReading((r) => !r);
+              }}
+            >
+              {reading ? "■ Stop reading" : "▶ Read to me"}
+            </button>
+          )}
+          <button
+            type="button"
+            className="btn ghost"
+            onClick={() => {
+              setReading(false);
+              setPrinting(true);
+            }}
+          >
+            Print the book
+          </button>
+          {blocked && <p className="comic-note">Your browser didn't let the page speak. Try pressing the button again.</p>}
+        </div>
       </header>
 
       <div className="comic-title">
         <span className="comic-chapter">
           Chapter {page.chapter} of {PAGES.length} · {page.years}
         </span>
-        <h2 ref={heading} tabIndex={-1}>
+        <h2 ref={heading} tabIndex={-1} className={line === 0 ? "reading" : undefined}>
           {page.title}
         </h2>
       </div>
 
-      <div key={page.id} className="comic-sheet" onPointerDown={onPointerDown} onPointerUp={onPointerUp}>
+      <div key={page.id} ref={sheet} className="comic-sheet" onPointerDown={onPointerDown} onPointerUp={onPointerUp}>
         <Art />
       </div>
 
@@ -109,6 +159,7 @@ export default function ComicBook() {
           </button>
         )}
       </nav>
+      {printing && <PrintBook onDone={() => setPrinting(false)} />}
     </section>
   );
 }
